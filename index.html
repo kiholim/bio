@@ -174,6 +174,7 @@
       object-position: center center;
       display: block;
       border-radius: 0;
+      z-index: 1;
     }
 
     .photo-placeholder {
@@ -190,6 +191,7 @@
       background: #f7f7f7;
       transition: opacity 180ms ease, visibility 180ms ease;
       border-radius: 0;
+      z-index: 2;
     }
 
     .photo-placeholder.is-hidden {
@@ -366,31 +368,86 @@
 
     @media (max-width: 640px) {
       .nav {
-        grid-template-columns: 1fr;
-        justify-items: flex-start;
-        gap: 14px;
-      }
-
-      .nav-logo {
-        width: 88px;
-      }
-
-      .nav-links {
-        justify-self: start;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         gap: 8px;
       }
 
-      .container {
-        padding-inline: 16px;
+      .nav-logo {
+        width: 72px;
       }
 
-      .content-card,
-      .section {
-        padding: 16px;
+      .nav-links {
+        justify-self: unset;
+        gap: 4px;
+        flex-wrap: nowrap;
+        font-size: 0.68rem;
+        white-space: nowrap;
+      }
+
+      .nav-links a {
+        padding: 4px 5px;
+      }
+
+      .container {
+        padding: 10px 14px 20px;
+      }
+
+      .hero,
+      .content-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
       .photo-card {
         max-width: 100%;
+        width: 100%;
+        align-self: auto;
+        justify-self: auto;
+      }
+
+      .photo-wrap {
+        width: min(100%, 260px);
+        margin: 0 auto;
+      }
+
+      .photo-meta {
+        text-align: center;
+        padding: 4px 10px 8px;
+      }
+
+      .photo-email {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .content-card,
+      .section {
+        padding: 14px;
+      }
+
+      .section h2 {
+        font-size: 1rem;
+      }
+
+      .section p,
+      .lead {
+        font-size: 0.92rem;
+      }
+
+      .research-card {
+        padding: 12px 14px 10px;
+      }
+
+      .tags {
+        gap: 4px;
+      }
+
+      .tag {
+        font-size: 0.7rem;
+        padding: 4px 7px;
       }
     }
   </style>
@@ -404,7 +461,7 @@
         <img class="nav-logo" src="https://www.wpunj.edu/template/wp24/images/wpStackedBlack.png" alt="William Paterson University" />
       </a>
       <div class="nav-links">
-        <a href="#research">Research</a>
+        <a href="#research-interests">Research</a>
         <a href="#teaching">Teaching</a>
         <a href="#service">Service</a>
       </div>
