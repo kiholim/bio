@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Kiho Lim | Faculty Profile</title>
+  <style>
+    :root {
+      --wpu-orange: #ea7a1e;
+      --wpu-orange-soft: #f8d9bf;
+      --wpu-charcoal: #111111;
+      --wpu-light: #f6f6f6;
+      --wpu-silver: #d2d6dc;
+      --wpu-border: rgba(17, 17, 17, 0.12);
+      --wpu-text: #25313c;
+      --wpu-muted: #5e6975;
+      --card: rgba(255, 255, 255, 0.96);
+      --card-solid: #ffffff;
+      --shadow: 0 14px 34px rgba(17, 17, 17, 0.08);
+      --radius: 0;
+      --max-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      color: var(--wpu-text);
+      background:
+        radial-gradient(circle at top left, rgba(234, 122, 30, 0.11), transparent 26%),
+        radial-gradient(circle at top right, rgba(17, 17, 17, 0.06), transparent 24%),
+        linear-gradient(180deg, #fdfdfd 0%, #f3f4f6 100%);
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
+        radial-gradient(circle at 20% 20%, rgba(234, 122, 30, 0.045), transparent 20%),
+        radial-gradient(circle at 80% 0%, rgba(17, 17, 17, 0.04), transparent 18%);
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      height: 6px;
+      background: linear-gradient(90deg, #ea7a1e 0%, #f3a04e 100%);
+    }
+
+    .site-header {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 7px 22px;
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      align-items: center;
+      gap: 20px;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    }
+
+    .nav-logo {
+      width: 100px;
+      height: auto;
+      display: block;
+      justify-self: center;
+      flex: 0 0 auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--wpu-muted);
+      justify-self: end;
+    }
+
+    .nav-links a {
+      padding: 8px 12px;
+      border-radius: 0;
+      transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--wpu-charcoal);
+      background: var(--wpu-orange-soft);
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 24px 22px 36px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 20px;
+      align-items: stretch;
+      margin-top: 4px;
+    }
+
+    .photo-card,
+    .content-card,
+    .section,
+    .sidebar-card {
+      background: var(--card);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .photo-card {
+      overflow: hidden;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      max-width: 180px;
+      justify-self: start;
+    }
+
+    .photo-wrap {
+      position: relative;
+      aspect-ratio: 529 / 640;
+      background: linear-gradient(180deg, #f4f4f4 0%, #e2e2e2 100%);
+      overflow: hidden;
+    }
+
+    .photo-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 28px;
+      color: var(--wpu-muted);
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
+        linear-gradient(135deg, #f7f7f7, #e1e1e1);
+      transition: opacity 180ms ease, visibility 180ms ease;
+    }
+
+    .photo-placeholder.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .photo-placeholder strong {
+      display: block;
+      color: var(--wpu-charcoal);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .photo-meta {
+      padding: 10px 12px 12px;
+      border-top: 3px solid var(--wpu-orange);
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    }
+
+    .photo-meta h2 {
+      margin: 0 0 6px;
+      font-size: 0.92rem;
+      color: var(--wpu-charcoal);
+    }
+
+    .photo-meta p {
+      margin: 0;
+      color: var(--wpu-muted);
+      font-size: 0.78rem;
+    }
+
+    .photo-email {
+      display: block;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(22, 27, 34, 0.08);
+      font-size: 0.76rem;
+      color: var(--wpu-charcoal);
+    }
+
+    .content-card {
+      padding: 24px 28px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 6px;
+      background: linear-gradient(90deg, #ea7a1e, #f3a04e);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 800;
+      color: var(--wpu-orange);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 3.6vw, 2.9rem);
+      line-height: 1.1;
+      color: var(--wpu-charcoal);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .title-line {
+      font-size: 1.02rem;
+      color: var(--wpu-muted);
+      margin-bottom: 14px;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    }
+
+    .bio-header {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--wpu-orange);
+      color: var(--wpu-charcoal);
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      font-size: 0.98rem;
+      margin: 0;
+      max-width: 68ch;
+    }
+
+    .content-stack {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+      align-items: stretch;
+    }
+
+    .section {
+      padding: 18px 18px 16px;
+      height: 100%;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 1.12rem;
+      color: var(--wpu-charcoal);
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .section h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 42px;
+      height: 3px;
+      background: linear-gradient(90deg, #ea7a1e, #f3a04e);
+      border-radius: 999px;
+    }
+
+    .section p {
+      margin: 0;
+      font-size: 0.93rem;
+      line-height: 1.52;
+    }
+
+    .research-card {
+      padding: 16px 18px 14px;
+    }
+
+    .research-card h2 {
+      margin-bottom: 8px;
+    }
+
+    .research-card .tags {
+      flex-wrap: wrap;
+      overflow-x: visible;
+      margin-top: 10px;
+    }
+
+    .research-card .tag {
+      font-size: 0.74rem;
+    }
+
+    .research-detail p {
+      font-size: 0.92rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6px;
+      margin-top: 12px;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      overflow-x: hidden;
+      padding-bottom: 2px;
+    }
+
+    .tag {
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(234, 122, 30, 0.18);
+      background: linear-gradient(180deg, #fff7ef 0%, #f7dcc2 100%);
+      color: #8e4c11;
+      font-size: 0.76rem;
+      font-weight: 600;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .full-width {
+      margin-top: 0;
+    }
+
+    .footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 10px 22px 18px;
+      color: var(--wpu-muted);
+      font-size: 0.82rem;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      text-align: right;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .content-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-card {
+        max-width: 180px;
+      }
+
+      .content-card,
+      .section {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        grid-template-columns: 1fr;
+        justify-items: flex-start;
+        gap: 14px;
+      }
+
+      .nav-logo {
+        width: 88px;
+      }
+
+      .nav-links {
+        justify-self: start;
+      }
+
+      .nav-links {
+        gap: 8px;
+      }
+
+      .container {
+        padding-inline: 16px;
+      }
+
+      .content-card,
+      .section {
+        padding: 18px;
+      }
+
+      .photo-card {
+        max-width: 100%;
+      }
+
+      .footer {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar"></div>
+
+  <header class="site-header">
+    <nav class="nav">
+      <img class="nav-logo" src="https://www.wpunj.edu/template/wp24/images/wpStackedBlack.png" alt="William Paterson University" />
+      <div class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#service">Service</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <aside class="photo-card">
+        <div class="photo-wrap">
+          <img src="./kiho.png" alt="Professor Kiho Lim" loading="eager" decoding="async" />
+          <div class="photo-placeholder" data-photo-placeholder>
+            <div>
+              <strong>Profile Photo</strong>
+              Check that `kiho.png` is present in the project root if the image does not load.
+            </div>
+          </div>
+        </div>
+        <div class="photo-meta">
+          <h2>Dr. Kiho Lim</h2>
+          <p>Associate Professor · Cybersecurity Lab Director</p>
+          <a class="photo-email" href="mailto:limk2@wpunj.edu">limk2@wpunj.edu</a>
+        </div>
+      </aside>
+
+      <section class="content-card">
+        <div class="bio-header">About</div>
+        <p class="lead">
+          Dr. Kiho Lim is an Associate Professor of Computer Science at William Paterson University of New Jersey, where he leads the WPU Cybersecurity Lab. He previously served as a faculty member at the University of South Dakota and earned his M.S. and Ph.D. in Computer Science from the University of Kentucky. His research interests include cybersecurity, network security, authentication, zero-trust security, connected and autonomous vehicle security, mobile and wireless networks, biometric security, and applied AI/ML for security.
+        </p>
+      </section>
+    </section>
+
+    <section class="section research-card" id="research-interests">
+      <h2>Research Interests</h2>
+      <div class="tags">
+        <span class="tag">Cybersecurity</span>
+        <span class="tag">Network Security</span>
+        <span class="tag">Authentication</span>
+        <span class="tag">Zero-Trust Security</span>
+        <span class="tag">Connected &amp; Autonomous Vehicle Security</span>
+        <span class="tag">Mobile &amp; Wireless Networks</span>
+        <span class="tag">Biometric Security</span>
+        <span class="tag">Applied AI/ML for Security</span>
+      </div>
+    </section>
+
+    <section class="content-stack">
+      <section class="section" id="teaching">
+        <h2>Teaching</h2>
+        <p>
+          Dr. Lim teaches cybersecurity, networking, cryptography, ethical hacking, penetration testing, cyber defense, and digital forensics. His certifications include Cisco Certified Instructor for CCNA and ACUE Certification in Creating an Inclusive and Supportive Learning Environment.
+        </p>
+      </section>
+
+      <section class="section research-detail" id="research">
+        <h2>Research</h2>
+        <p>
+          His research portfolio includes more than 50 publications in international journals and conferences. He has also received research grants from NRF and IITP and served as a guest editor for FGCS, Sensors, DCN, and ICT Express.
+        </p>
+      </section>
+
+      <section class="section" id="service">
+        <h2>Service</h2>
+        <p>
+          Dr. Lim founded and directs the WPU Cybersecurity Lab and established the Cisco Networking Lab. He also contributes to hands-on lab infrastructure, cybersecurity curriculum, and student research mentoring.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Compact faculty profile with a muted bronze-and-slate palette.
+  </footer>
+
+  <script>
+    (function () {
+      const img = document.querySelector('.photo-wrap img');
+      const placeholder = document.querySelector('[data-photo-placeholder]');
+
+      if (!img || !placeholder) return;
+
+      const hidePlaceholder = () => placeholder.classList.add('is-hidden');
+
+      if (img.complete && img.naturalWidth > 0) {
+        hidePlaceholder();
+      } else {
+        img.addEventListener('load', hidePlaceholder, { once: true });
+        img.addEventListener('error', () => {
+          placeholder.classList.remove('is-hidden');
+        }, { once: true });
+      }
+    })();
+  </script>
+</body>
+</html>
