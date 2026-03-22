@@ -33,10 +33,7 @@
       margin: 0;
       font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
       color: var(--wpu-text);
-      background:
-        radial-gradient(circle at top left, rgba(234, 122, 30, 0.11), transparent 26%),
-        radial-gradient(circle at top right, rgba(17, 17, 17, 0.06), transparent 24%),
-        linear-gradient(180deg, #fdfdfd 0%, #f3f4f6 100%);
+      background: #f6f7f8;
       line-height: 1.55;
     }
 
@@ -45,10 +42,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background:
-        linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
-        radial-gradient(circle at 20% 20%, rgba(234, 122, 30, 0.045), transparent 20%),
-        radial-gradient(circle at 80% 0%, rgba(17, 17, 17, 0.04), transparent 18%);
+      background: linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22));
       z-index: -1;
     }
 
@@ -57,15 +51,19 @@
       text-decoration: none;
     }
 
+    a:focus-visible {
+      outline: 3px solid rgba(234, 122, 30, 0.45);
+      outline-offset: 3px;
+    }
+
     .topbar {
-      height: 6px;
+      height: 4px;
       background: linear-gradient(90deg, #ea7a1e 0%, #f3a04e 100%);
     }
 
     .site-header {
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid rgba(17, 17, 17, 0.06);
       position: sticky;
       top: 0;
       z-index: 10;
@@ -74,7 +72,7 @@
     .nav {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 7px 22px;
+      padding: 6px 22px;
       display: grid;
       grid-template-columns: 180px minmax(0, 1fr);
       align-items: center;
@@ -111,29 +109,33 @@
       transform: translateY(-1px);
     }
 
+    .nav-links a:focus-visible {
+      color: var(--wpu-charcoal);
+      background: var(--wpu-orange-soft);
+      transform: translateY(-1px);
+    }
+
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 14px 22px 36px;
+      padding: 10px 22px 28px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 180px minmax(0, 1fr);
-      gap: 20px;
+      grid-template-columns: 156px minmax(0, 1fr);
+      gap: 14px;
       align-items: stretch;
       margin-top: 0;
     }
 
     .photo-card,
     .content-card,
-    .section,
-    .sidebar-card {
+    .section {
       background: var(--card);
-      border: 1px solid rgba(17, 17, 17, 0.08);
+      border: 1px solid rgba(17, 17, 17, 0.06);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 20px rgba(17, 17, 17, 0.05);
     }
 
     .photo-card {
@@ -141,18 +143,29 @@
       align-self: stretch;
       display: flex;
       flex-direction: column;
-      max-width: 180px;
+      max-width: 156px;
       justify-self: start;
     }
 
     .photo-wrap {
       position: relative;
       aspect-ratio: 529 / 640;
-      background: linear-gradient(180deg, #f4f4f4 0%, #e2e2e2 100%);
+      background: #f2f3f4;
+      border-radius: 0;
       overflow: hidden;
     }
 
-    .photo-wrap img {
+    .photo-frame {
+      position: absolute;
+      inset: 6px;
+      border-radius: 0;
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      background: #ffffff;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .photo-frame img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -160,6 +173,7 @@
       object-fit: contain;
       object-position: center center;
       display: block;
+      border-radius: 0;
     }
 
     .photo-placeholder {
@@ -170,13 +184,12 @@
       display: grid;
       place-items: center;
       text-align: center;
-      padding: 28px;
+      padding: 22px;
       color: var(--wpu-muted);
       font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      background:
-        linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)),
-        linear-gradient(135deg, #f7f7f7, #e1e1e1);
+      background: #f7f7f7;
       transition: opacity 180ms ease, visibility 180ms ease;
+      border-radius: 0;
     }
 
     .photo-placeholder.is-hidden {
@@ -193,34 +206,34 @@
     }
 
     .photo-meta {
-      padding: 10px 12px 12px;
-      border-top: 3px solid var(--wpu-orange);
+      padding: 3px 8px 6px;
       font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
     }
 
     .photo-meta h2 {
-      margin: 0 0 6px;
-      font-size: 0.92rem;
+      margin: 0 0 1px;
+      font-size: 0.84rem;
       color: var(--wpu-charcoal);
     }
 
     .photo-meta p {
       margin: 0;
       color: var(--wpu-muted);
-      font-size: 0.78rem;
+      font-size: 0.72rem;
+      line-height: 1.25;
     }
 
     .photo-email {
       display: block;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid rgba(22, 27, 34, 0.08);
-      font-size: 0.76rem;
+      margin-top: 4px;
+      padding-top: 4px;
+      border-top: 1px solid rgba(22, 27, 34, 0.06);
+      font-size: 0.74rem;
       color: var(--wpu-charcoal);
     }
 
     .content-card {
-      padding: 24px 28px 22px;
+      padding: 20px 24px 18px;
       position: relative;
       overflow: hidden;
     }
@@ -229,52 +242,25 @@
       content: "";
       position: absolute;
       inset: 0 0 auto 0;
-      height: 6px;
-      background: linear-gradient(90deg, #ea7a1e, #f3a04e);
-    }
-
-    .eyebrow {
-      display: inline-block;
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 800;
-      color: var(--wpu-orange);
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2rem, 3.6vw, 2.9rem);
-      line-height: 1.1;
-      color: var(--wpu-charcoal);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .title-line {
-      font-size: 1.02rem;
-      color: var(--wpu-muted);
-      margin-bottom: 14px;
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(234, 122, 30, 0.55), rgba(243, 160, 78, 0.45));
     }
 
     .bio-header {
       display: inline-block;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 3px solid var(--wpu-orange);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--wpu-orange);
       color: var(--wpu-charcoal);
       font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
     .lead {
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       margin: 0;
       max-width: 68ch;
     }
@@ -282,22 +268,23 @@
     .content-stack {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 14px;
+      gap: 10px;
+      margin-top: 10px;
       align-items: stretch;
     }
 
     .section {
-      padding: 18px 18px 16px;
+      padding: 16px 16px 14px;
       height: 100%;
+      scroll-margin-top: 92px;
     }
 
     .section h2 {
-      margin: 0 0 10px;
-      font-size: 1.12rem;
+      margin: 0 0 8px;
+      font-size: 1.06rem;
       color: var(--wpu-charcoal);
       position: relative;
-      padding-bottom: 8px;
+      padding-bottom: 6px;
     }
 
     .section h2::after {
@@ -305,7 +292,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 42px;
+      width: 34px;
       height: 3px;
       background: linear-gradient(90deg, #ea7a1e, #f3a04e);
       border-radius: 999px;
@@ -313,26 +300,26 @@
 
     .section p {
       margin: 0;
-      font-size: 0.93rem;
-      line-height: 1.52;
+      font-size: 0.92rem;
+      line-height: 1.48;
     }
 
     .research-card {
-      padding: 16px 18px 14px;
+      padding: 14px 16px 12px;
     }
 
     .research-card h2 {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .research-card .tags {
       flex-wrap: wrap;
       overflow-x: visible;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .research-card .tag {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
     }
 
     .research-detail p {
@@ -342,37 +329,23 @@
     .tags {
       display: flex;
       flex-wrap: nowrap;
-      gap: 6px;
-      margin-top: 12px;
+      gap: 5px;
+      margin-top: 10px;
       font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
       overflow-x: hidden;
-      padding-bottom: 2px;
+      padding-bottom: 1px;
     }
 
     .tag {
-      padding: 5px 9px;
+      padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(234, 122, 30, 0.18);
-      background: linear-gradient(180deg, #fff7ef 0%, #f7dcc2 100%);
-      color: #8e4c11;
-      font-size: 0.76rem;
+      border: 1px solid rgba(37, 49, 60, 0.08);
+      background: rgba(255, 255, 255, 0.72);
+      color: #556270;
+      font-size: 0.74rem;
       font-weight: 600;
       white-space: nowrap;
       flex: 0 0 auto;
-    }
-
-    .full-width {
-      margin-top: 0;
-    }
-
-    .footer {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 10px 22px 18px;
-      color: var(--wpu-muted);
-      font-size: 0.82rem;
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      text-align: right;
     }
 
     @media (max-width: 920px) {
@@ -382,12 +355,12 @@
       }
 
       .photo-card {
-        max-width: 180px;
+        max-width: 156px;
       }
 
       .content-card,
       .section {
-        padding: 24px;
+        padding: 18px;
       }
     }
 
@@ -404,9 +377,6 @@
 
       .nav-links {
         justify-self: start;
-      }
-
-      .nav-links {
         gap: 8px;
       }
 
@@ -416,15 +386,11 @@
 
       .content-card,
       .section {
-        padding: 18px;
+        padding: 16px;
       }
 
       .photo-card {
         max-width: 100%;
-      }
-
-      .footer {
-        text-align: left;
       }
     }
   </style>
@@ -434,7 +400,9 @@
 
   <header class="site-header">
     <nav class="nav">
-      <img class="nav-logo" src="https://www.wpunj.edu/template/wp24/images/wpStackedBlack.png" alt="William Paterson University" />
+      <a href="https://www.wpunj.edu/" aria-label="Visit William Paterson University">
+        <img class="nav-logo" src="https://www.wpunj.edu/template/wp24/images/wpStackedBlack.png" alt="William Paterson University" />
+      </a>
       <div class="nav-links">
         <a href="#research">Research</a>
         <a href="#teaching">Teaching</a>
@@ -447,11 +415,13 @@
     <section class="hero">
       <aside class="photo-card">
         <div class="photo-wrap">
-          <img src="./kiho.png" alt="Professor Kiho Lim" loading="eager" decoding="async" />
-          <div class="photo-placeholder" data-photo-placeholder>
-            <div>
-              <strong>Profile Photo</strong>
-              Check that `kiho.png` is present in the project root if the image does not load.
+          <div class="photo-frame">
+            <img src="./kiho.png" alt="Professor Kiho Lim" loading="eager" decoding="async" />
+            <div class="photo-placeholder" data-photo-placeholder>
+              <div>
+                <strong>Profile Photo</strong>
+                Check that kiho.png is present in the project root if the image does not load.
+              </div>
             </div>
           </div>
         </div>
@@ -508,10 +478,6 @@
     </section>
   </main>
 
-  <footer class="footer">
-    William Paterson University faculty profile for Dr. Kiho Lim.
-  </footer>
-
   <script>
     (function () {
       const img = document.querySelector('.photo-wrap img');
@@ -526,6 +492,7 @@
       } else {
         img.addEventListener('load', hidePlaceholder, { once: true });
         img.addEventListener('error', () => {
+          img.setAttribute('aria-hidden', 'true');
           placeholder.classList.remove('is-hidden');
         }, { once: true });
       }
